@@ -1,17 +1,24 @@
-
+CREATE DATABASE proyecto;
+USE proyecto;
 
 CREATE TABLE Persona (
 DNI integer,
-CHECK (DNI > 0),
 nombre varchar(50),
 apellido varchar(50),
 direccion varchar(100),
 PRIMARY KEY (DNI)
 );
 
+CREATE TABLE MPersona (
+DNI integer,
+telefono integer,
+CONSTRAINT pk_mpersona PRIMARY KEY (DNI,telefono),
+CONSTRAINT fk_persona FOREIGN KEY (DNI) REFERENCES Persona(DNI)
+);
+
 CREATE TABLE Docente (
 DNI_docente integer,
-dedicacion enum('exclusivo','semi-exclusivo','simple'),
+dedicacion enum('Exclusivo','Semi-exclusivo','Simple'),
 CONSTRAINT pk_docente PRIMARY KEY (DNI_docente),
 CONSTRAINT fk_docente_persona FOREIGN KEY (DNI_docente) REFERENCES Persona(DNI)
 );
@@ -90,3 +97,7 @@ CONSTRAINT fk_pertenece_docente FOREIGN KEY (DNI_docente) REFERENCES Docente(DNI
 CONSTRAINT fk_pertenece_facultad FOREIGN KEY (cod_facultad) REFERENCES Facultad(cod_facultad),
 CONSTRAINT fk_pertenece_cargo FOREIGN KEY (cod_cargo) REFERENCES Cargo(cod_cargo)
 );
+
+/* antes de ingresar un docente a la relacion asignado debemos chequear que no pertenece a pertenece*/
+
+
