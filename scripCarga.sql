@@ -19,7 +19,8 @@ INSERT INTO Persona (DNI,nombre,apellido,direccion) VALUES
 (39543576,'Marisa','Flores','Rafael Obligado 765'),
 (34547864,'Micaela','Lepori','Alberdi 813'),
 (29446541,'Franco','Barzola','9 de julio 81'),
-(29435690,'Matias','Barzola','San Martin 890');
+(29435690,'Matias','Barzola','San Martin 890'),
+(25501211,'Fabian','Palacio','Bolivia 21');
 
 INSERT INTO MPersona (DNI,telefono) VALUES 
 (12543569,15447889),
@@ -39,7 +40,7 @@ INSERT INTO MPersona (DNI,telefono) VALUES
 (29446541,15450480),
 (29435690,15442589)
 ;
-*/
+
 INSERT INTO Docente (DNI_docente,dedicacion) VALUES
 (12543569,1), 
 (39544576,3),
@@ -59,7 +60,10 @@ INSERT INTO Materia (cod_materia,nombre,DNI_docente) VALUES
 (0006,'Algebra',29435690),
 (0007,'Logica',12543569),
 (0008,'Estadistica',29446541),
-(0009,'Ingenieria de software', 25501211);
+(0009,'Ingenieria de software', 25501211),
+(0010,'Diseño', 34547864)
+;
+
 
 INSERT INTO Actividad (cod_actividad,desc_actividad,cod_materia) VALUES 
 (0001,'TP3 8queens',0005),
@@ -73,18 +77,18 @@ INSERT INTO Actividad (cod_actividad,desc_actividad,cod_materia) VALUES
 (0009,'TP1 Assembler',0002),
 (0010,'TP1 Logica',0007);
 
-
+*/
 INSERT INTO Resolucion (cod_resolucion,fecha,hora,DNI_docente,cod_actividad,nota) VALUES
-(0001,2017-07-03, 10, 12543569, 0008),
-(0002,2017-08-13, 8, 39544576, 0009),
-(0003,2018-03-15, 8, 33465969, 0003),
-(0004,2019-04-09, 7, 25501211, 0002),
-(0005,2019-08-22, 10, 29435690, 0007),
-(0006,2019-11-01, 5, 39543576, 0009),
-(0007,2020-05-17, 9, 34547864, 0002),
-(0008,2020-09-18, 6, 12543569, 0009),
-(0009,2020-10-11, 8, 39543576, 0005),
-(0010,2021-04-04, 7, 29446541, 0006);
+(0001,07-03-2017,1, 12543569, 0008, 10),
+(0002,08-03-2017,2, 39544576, 0009, 8),
+(0003,03-05-2018,3, 33465969, 0003, 8),
+(0004,04-09-2019,4, 25501211, 0002, 7),
+(0005,08-12-2019,5, 29435690, 0007, 10),
+(0006,11-01-2019,6, 39543576, 0009, 5),
+(0007,05-01-2020,7, 34547864, 0002, 9),
+(0008,09-01-2020,8, 12543569, 0009, 6),
+(0009,10-11-2020,9, 39543576, 0005, 8),
+(0010,04-04-2021,10, 29446541, 0006, 7);
 
 INSERT INTO Alumno (DNI_alumno,num_alumno,cod_resolucion) VALUES 
 (12543569,1,0001),
