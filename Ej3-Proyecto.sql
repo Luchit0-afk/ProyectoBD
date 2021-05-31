@@ -1,5 +1,5 @@
-CREATE DATABASE proyecto;
-USE proyecto;
+CREATE DATABASE ProyectoDB;
+USE ProyectoDB;
 
 CREATE TABLE Persona (
 DNI integer,
@@ -41,11 +41,10 @@ CONSTRAINT fk_actividad_materia FOREIGN KEY (cod_materia) REFERENCES Materia(cod
 
 CREATE TABLE Resolucion (
 cod_resolucion integer,
-fecha date,
-hora integer,
+fecha_hora datetime,
+nota integer,
 DNI_docente integer,
 cod_actividad integer,
-nota integer,
 CONSTRAINT pk_resolucion PRIMARY KEY (cod_resolucion),
 CONSTRAINT fk_resolucion_docente FOREIGN KEY (DNI_docente) REFERENCES Docente(DNI_docente),
 CONSTRAINT fk_resolucion_actividad FOREIGN KEY (cod_actividad) REFERENCES Actividad(cod_actividad)
@@ -92,9 +91,9 @@ CREATE TABLE Pertenece (
 cod_facultad integer,
 DNI_docente integer,
 cod_cargo integer,
-CONSTRAINT pk_pertenece PRIMARY KEY (cod_facultad,DNI_docente),
-CONSTRAINT fk_pertenece_docente FOREIGN KEY (DNI_docente) REFERENCES Docente(DNI_docente),
+CONSTRAINT pk_pertenece PRIMARY KEY (cod_facultad,DNI_docente,cod_cargo),
 CONSTRAINT fk_pertenece_facultad FOREIGN KEY (cod_facultad) REFERENCES Facultad(cod_facultad),
+CONSTRAINT fk_pertenece_docente FOREIGN KEY (DNI_docente) REFERENCES Docente(DNI_docente),
 CONSTRAINT fk_pertenece_cargo FOREIGN KEY (cod_cargo) REFERENCES Cargo(cod_cargo)
 );
 

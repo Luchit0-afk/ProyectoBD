@@ -1,8 +1,8 @@
 --
 -- Carga de contenidos en la tablas
 --
-USE proyecto;
-/*
+USE ProyectoDB;
+
 INSERT INTO Persona (DNI,nombre,apellido,direccion) VALUES 
 (12543569,'Sofia','Urquiza','Tucuman 123'),
 (12345568,'Rocio','Urquiza','Tucuman 123'),
@@ -77,18 +77,18 @@ INSERT INTO Actividad (cod_actividad,desc_actividad,cod_materia) VALUES
 (0009,'TP1 Assembler',0002),
 (0010,'TP1 Logica',0007);
 
-*/
-INSERT INTO Resolucion (cod_resolucion,fecha,hora,DNI_docente,cod_actividad,nota) VALUES
-(0001,07-03-2017,1, 12543569, 0008, 10),
-(0002,08-03-2017,2, 39544576, 0009, 8),
-(0003,03-05-2018,3, 33465969, 0003, 8),
-(0004,04-09-2019,4, 25501211, 0002, 7),
-(0005,08-12-2019,5, 29435690, 0007, 10),
-(0006,11-01-2019,6, 39543576, 0009, 5),
-(0007,05-01-2020,7, 34547864, 0002, 9),
-(0008,09-01-2020,8, 12543569, 0009, 6),
-(0009,10-11-2020,9, 39543576, 0005, 8),
-(0010,04-04-2021,10, 29446541, 0006, 7);
+
+INSERT INTO Resolucion (cod_resolucion,fecha_hora,nota,DNI_docente,cod_actividad) VALUES
+(0001,'2017-07-03 16:30:00', 10, 12543569, 0008),
+(0002,'2017-08-03 16:45:00', 8, 39544576, 0009),
+(0003,'2018-03-05 13:50:00', 8, 33465969, 0003),
+(0004,'2019-04-09 14:30:00', 7, 25501211, 0002),
+(0005,'2019-08-12 20:00:00', 10, 29435690, 0007),
+(0006,'2019-11-01 17:45:00', 5, 39543576, 0009),
+(0007,'2020-05-01 12:30:00', 9, 34547864, 0002),
+(0008,'2020-09-01 18:15:00', 6, 12543569, 0009),
+(0009,'2020-10-11 15:00:00', 8, 39543576, 0005),
+(0010,'2021-04-04 13:30:00', 7, 29446541, 0006);
 
 INSERT INTO Alumno (DNI_alumno,num_alumno,cod_resolucion) VALUES 
 (12543569,1,0001),
@@ -108,7 +108,7 @@ INSERT INTO Facultad (cod_facultad,desc_facultad) VALUES
 (0003,'Ciencias sociales'),
 (0004,'Arquitectura, disenio y urbanismo'),
 (0005,'Medicina'),
-(0005,'Derecho');
+(0006,'Derecho');
 
 INSERT INTO Cargo (cod_cargo,desc_cargo) VALUES
 (0001,'profesor'),
@@ -144,12 +144,12 @@ INSERT INTO Asignado (cod_materia,DNI_docente) VALUES
 (0009,39543576),
 (0006,25501211);
 
-INSERT INTO pertenece (cod_facultad,DNI_docente,cod_cargo) VALUES
-(12543569,0005,0004),
-(29446541,0003,0007),
-(39544576,0003,0006),
-(29435690,0002,0001),
-(33465969,0004,0003),
-(34547864,0001,0009),
-(39543576,0004,0008),
-(25501211,0003,0007);
+INSERT INTO Pertenece (cod_facultad,DNI_docente,cod_cargo) VALUES
+(0005,12543569,0004),
+(0003,29446541,0007),
+(0003,39544576,0006),
+(0002,29435690,0001),
+(0004,33465969,0003),
+(0001,34547864,0009),
+(0004,39543576,0008),
+(0003,25501211,0007);
