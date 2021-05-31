@@ -51,44 +51,42 @@ INSERT INTO Docente (DNI_docente,dedicacion) VALUES
 (29435690,3),
 (25501211,2);
 
-INSERT INTO Materia (cod_materia,nombre,DNI_docente) VALUES 
-(0001,'Base De Datos',39544576),
-(0002,'Organizacion del Procesador',33465969),
-(0003,'Algoritmica',39543576),
-(0004,'Calculo',12543569),
-(0005,'Algoritmos',34547864),
-(0006,'Algebra',29435690),
-(0007,'Logica',12543569),
-(0008,'Estadistica',29446541),
-(0009,'Ingenieria de software', 29446541),
-(0010,'Diseño', 34547864)
-;
+INSERT INTO Materia (nombre,DNI_docente) VALUES 
+('Base De Datos',39544576),
+('Organizacion del Procesador',33465969),
+('Algoritmica',39543576),
+('Calculo',12543569),
+('Algoritmos',34547864),
+('Algebra',29435690),
+('Logica',12543569),
+('Estadistica',29446541),
+('Ingenieria de software', 25501211),
+('Diseño', 34547864);
+
+INSERT INTO Actividad (desc_actividad,cod_materia) VALUES 
+('TP3 8queens',0005),
+('TP2 figure-figure',0005),
+('TP1 lines-builder',0005),
+('Proyecto ODP',0002),
+('Proyecto BDD',0001),
+('Parcial en laboratorio',0003),
+('TP1 Netflix',0003),
+('Proyecto Test-Vocacional',0010),
+('TP1 Assembler',0002),
+('TP1 Logica',0007);
 
 
-INSERT INTO Actividad (cod_actividad,desc_actividad,cod_materia) VALUES 
-(0001,'TP3 8queens',0005),
-(0002,'TP2 figure-figure',0005),
-(0003,'TP1 lines-builder',0005),
-(0004,'Proyecto ODP',0002),
-(0005,'Proyecto BDD',0001),
-(0006,'Parcial en laboratorio',0003),
-(0007,'TP1 Netflix',0003),
-(0008,'Proyecto Test-Vocacional',0010),
-(0009,'TP1 Assembler',0002),
-(0010,'TP1 Logica',0007);
-
-
-INSERT INTO Resolucion (cod_resolucion,fecha_hora,nota,DNI_docente,cod_actividad) VALUES
-(0001,'2017-07-03 16:30:00', 10, 12543569, 0008),
-(0002,'2017-08-03 16:45:00', 8, 39544576, 0009),
-(0003,'2018-03-05 13:50:00', 8, 33465969, 0003),
-(0004,'2019-04-09 14:30:00', 7, 25501211, 0002),
-(0005,'2019-08-12 20:00:00', 10, 29435690, 0007),
-(0006,'2019-11-01 17:45:00', 5, 39543576, 0009),
-(0007,'2020-05-01 12:30:00', 9, 34547864, 0002),
-(0008,'2020-09-01 18:15:00', 6, 12543569, 0009),
-(0009,'2020-10-11 15:00:00', 8, 39543576, 0005),
-(0010,'2021-04-04 13:30:00', 7, 29446541, 0006);
+INSERT INTO Resolucion (fecha_hora,nota,DNI_docente,cod_actividad) VALUES
+('2017-07-03 16:30:00', 10, 12543569, 0008),
+('2017-08-03 16:45:00', 8, 39544576, 0009),
+('2018-03-05 13:50:00', 8, 33465969, 0003),
+('2019-04-09 14:30:00', 7, 25501211, 0002),
+('2019-08-12 20:00:00', 10, 29435690, 0007),
+('2019-11-01 17:45:00', 5, 39543576, 0009),
+('2020-05-01 12:30:00', 9, 34547864, 0002),
+('2020-09-01 18:15:00', 6, 12543569, 0009),
+('2020-10-11 15:00:00', 8, 39543576, 0005),
+('2021-04-04 13:30:00', 7, 29446541, 0006);
 
 INSERT INTO Alumno (DNI_alumno,num_alumno,cod_resolucion) VALUES 
 (12543569,1,0001),
@@ -102,25 +100,25 @@ INSERT INTO Alumno (DNI_alumno,num_alumno,cod_resolucion) VALUES
 (12547543,9,0009),
 (34435690,10,0010);
 
-INSERT INTO Facultad (cod_facultad,desc_facultad) VALUES
-(0001,'Ciencias exactas y naturales'),
-(0002,'Ciencias economicas'),
-(0003,'Ciencias sociales'),
-(0004,'Arquitectura, disenio y urbanismo'),
-(0005,'Medicina'),
-(0006,'Derecho');
+INSERT INTO Facultad (desc_facultad) VALUES
+('Ciencias exactas y naturales'),
+('Ciencias economicas'),
+('Ciencias sociales'),
+('Arquitectura, disenio y urbanismo'),
+('Medicina'),
+('Derecho');
 
-INSERT INTO Cargo (cod_cargo,desc_cargo) VALUES
-(0001,'profesor'),
-(0002,'director administrativo'),
-(0003,'secretario general'),
-(0004,'rector'),
-(0005,'vice-rector'),
-(0006,'fiscal'),
-(0007,'decano'),
-(0008,'director de facultad'),
-(0009,'director de departamento'),
-(0010,'director de desarrollo estudiantil');
+INSERT INTO Cargo (desc_cargo) VALUES
+('profesor'),
+('director administrativo'),
+('secretario general'),
+('rector'),
+('vice-rector'),
+('fiscal'),
+('decano'),
+('director de facultad'),
+('director de departamento'),
+('director de desarrollo estudiantil');
 
 INSERT INTO Cursa (DNI_alumno,cod_materia) VALUES
 (12543569,0001),
@@ -135,6 +133,13 @@ INSERT INTO Cursa (DNI_alumno,cod_materia) VALUES
 (34435690,0005);
 
 INSERT INTO Asignado (cod_materia,DNI_docente) VALUES
+(0002,12543569), 
+(0004,29446541),
+(0001,39544576),
+(0008,29435690),
+(0004,33465969),
+(0007,34547864),
+(0009,39543576),
 (0006,25501211);
 
 INSERT INTO Pertenece (cod_facultad,DNI_docente,cod_cargo) VALUES
