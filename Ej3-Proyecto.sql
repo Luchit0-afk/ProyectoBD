@@ -1,5 +1,5 @@
-CREATE DATABASE ProyectoDB;
-USE ProyectoDB;
+CREATE DATABASE Proyecto;
+USE Proyecto;
 
 CREATE TABLE Persona (
 DNI integer,
@@ -97,6 +97,54 @@ CONSTRAINT fk_pertenece_docente FOREIGN KEY (DNI_docente) REFERENCES Docente(DNI
 CONSTRAINT fk_pertenece_cargo FOREIGN KEY (cod_cargo) REFERENCES Cargo(cod_cargo)
 );
 
-/* antes de ingresar un docente a la relacion asignado debemos chequear que no pertenece a pertenece*/
+CREATE TABLE Auditoria (
+cod_resolucion integer,
+calificacion_anterior integer,
+calificacion_nueva integer,
+fecha date,
+usuario varchar(50),
+CONSTRAINT pk_auditoria PRIMARY KEY (cod_resolucion)
+);
+
+/* antes de ingresar un docente a la relacion asignado debemos chequear que no pertenece a materia*/
+
+delimiter $$
+CREATE TRIGGER trigger_docente_responsable
+	BEFORE INSERT ON Asignado
+	  FOR EACH ROW
+		BEGIN
+			IF NEW.DNI_docente IN (SELECT DNI_docente from Materia) THEN 
+			/* Si el docente no es responsable de una materia*/
+            /* Si existe  */
+				signal sqlstate '45000';
+            END IF;
+		END;
+$$
+delimiter ;
+
+delimiter $$
+CREATE TRIGGER trigger_docente_asignado
+	BEFORE INSERT ON Materia
+	  FOR EACH ROW
+		BEGIN
+			IF NEW.DNI_docente IN (SELECT DNI_docente from Asignado) THEN 
+			/* Si el docente no es responsable de una materia*/
+            /* Si existe  */
+				signal sqlstate '45000';
+            END IF;
+		END;
+$$
+delimiter ;
+
+delimiter $$
+CREATE TRIGGER trigger_carga_auditoria
+	AFTER UPDATE ON Resolucion
+		FOR EACH ROW
+			BEGIN
+				INSERT INTO Auditoria VALUES (OLD.cod_resolucion,OLD.nota,NEW.nota,NOW(),CURRENT_USER());
+			END;
+$$
+delimiter ;
+
 
 

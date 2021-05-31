@@ -1,7 +1,7 @@
 --
 -- Carga de contenidos en la tablas
 --
-USE ProyectoDB;
+USE Proyecto;
 
 INSERT INTO Persona (DNI,nombre,apellido,direccion) VALUES 
 (12543569,'Sofia','Urquiza','Tucuman 123'),
@@ -60,7 +60,7 @@ INSERT INTO Materia (cod_materia,nombre,DNI_docente) VALUES
 (0006,'Algebra',29435690),
 (0007,'Logica',12543569),
 (0008,'Estadistica',29446541),
-(0009,'Ingenieria de software', 25501211),
+(0009,'Ingenieria de software', 29446541),
 (0010,'Diseño', 34547864)
 ;
 
@@ -135,13 +135,6 @@ INSERT INTO Cursa (DNI_alumno,cod_materia) VALUES
 (34435690,0005);
 
 INSERT INTO Asignado (cod_materia,DNI_docente) VALUES
-(0002,12543569), 
-(0004,29446541),
-(0001,39544576),
-(0008,29435690),
-(0004,33465969),
-(0007,34547864),
-(0009,39543576),
 (0006,25501211);
 
 INSERT INTO Pertenece (cod_facultad,DNI_docente,cod_cargo) VALUES
