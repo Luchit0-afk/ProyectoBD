@@ -43,8 +43,7 @@ INSERT INTO MPersona (DNI,telefono) VALUES
 (39543576,15671782),
 (34547864,15668381),
 (29446541,15450480),
-(29435690,15442589)
-;
+(29435690,15442589);
 
 INSERT INTO Docente (DNI_docente,dedicacion) VALUES
 (12543569,1), 
@@ -84,7 +83,6 @@ INSERT INTO Actividad (desc_actividad,cod_materia) VALUES
 ('TP1 Assembler',0002),
 ('TP1 Logica',0007);
 
-
 INSERT INTO Resolucion (fecha_hora,nota,DNI_docente,cod_actividad) VALUES
 ('2017-07-03 16:30:00', 10, 12543569, 0008),
 ('2017-08-03 16:45:00', 8, 39544576, 0009),
@@ -97,17 +95,17 @@ INSERT INTO Resolucion (fecha_hora,nota,DNI_docente,cod_actividad) VALUES
 ('2020-10-11 15:00:00', 8, 39543576, 0005),
 ('2021-04-04 13:30:00', 7, 29446541, 0006);
 
-INSERT INTO Alumno (DNI_alumno,num_alumno,cod_resolucion) VALUES 
-(12543569,1,0001),
-(12345568,2,0002),
-(23543882,3,0003),
-(32556763,4,0004),
-(42465690,5,0005),
-(37891852,6,0006),
-(25455069,7,0007),
-(42543564,8,0008),
-(12547543,9,0009),
-(34435690,10,0010);
+INSERT INTO Alumno (DNI_alumno,cod_resolucion) VALUES 
+(12543569,0001),
+(12345568,0002),
+(23543882,0003),
+(32556763,0004),
+(42465690,0005),
+(37891852,0006),
+(25455069,0007),
+(42543564,0008),
+(12547543,0009),
+(34435690,0010);
 
 INSERT INTO Facultad (desc_facultad) VALUES
 ('Ciencias exactas y naturales'),
@@ -147,7 +145,6 @@ INSERT INTO Asignado (cod_materia,DNI_docente) VALUES
 (0001,38974563),
 (0002,40156234),
 (0001,12345678);
-
 
 INSERT INTO Pertenece (cod_facultad,DNI_docente,cod_cargo) VALUES
 (0005,12543569,0004),
