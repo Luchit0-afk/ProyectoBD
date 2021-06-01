@@ -60,7 +60,7 @@ INSERT INTO Materia (nombre,DNI_docente) VALUES
 ('Algebra',29435690),
 ('Logica',12543569),
 ('Estadistica',29446541),
-('Ingenieria de software', 25501211),
+('Ingenieria de software', 29446541),
 ('Diseño', 34547864);
 
 INSERT INTO Actividad (desc_actividad,cod_materia) VALUES 
@@ -133,13 +133,6 @@ INSERT INTO Cursa (DNI_alumno,cod_materia) VALUES
 (34435690,0005);
 
 INSERT INTO Asignado (cod_materia,DNI_docente) VALUES
-(0002,12543569), 
-(0004,29446541),
-(0001,39544576),
-(0008,29435690),
-(0004,33465969),
-(0007,34547864),
-(0009,39543576),
 (0006,25501211);
 
 INSERT INTO Pertenece (cod_facultad,DNI_docente,cod_cargo) VALUES
