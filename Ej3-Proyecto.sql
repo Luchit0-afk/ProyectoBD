@@ -3,18 +3,18 @@ USE Proyecto;
 
 CREATE TABLE Persona (
 DNI integer NOT NULL,
-CONSTRAINT check_dni_persona CHECK (DNI > 0),
 nombre varchar(50),
 apellido varchar(50),
 direccion varchar(100),
-PRIMARY KEY (DNI)
+PRIMARY KEY (DNI),
+CONSTRAINT check_dni_persona CHECK (DNI > 0)
 );
 
 CREATE TABLE MPersona (
 DNI integer NOT NULL,
 telefono integer,
-CONSTRAINT check_telefono CHECK (telefono > 0),
 CONSTRAINT pk_mpersona PRIMARY KEY (DNI,telefono),
+CONSTRAINT check_telefono CHECK (telefono > 0),
 CONSTRAINT fk_persona FOREIGN KEY (DNI) REFERENCES Persona(DNI)
 ON DELETE CASCADE
 ON UPDATE RESTRICT
@@ -54,10 +54,10 @@ CREATE TABLE Resolucion (
 cod_resolucion integer NOT NULL AUTO_INCREMENT,
 fecha_hora datetime,
 nota integer NOT NULL,
-CONSTRAINT check_nota CHECK (nota > 0 AND nota < 11),
 DNI_docente integer NOT NULL,
 cod_actividad integer NOT NULL,
 CONSTRAINT pk_resolucion PRIMARY KEY (cod_resolucion),
+CONSTRAINT check_nota CHECK (nota > 0 AND nota < 11),
 CONSTRAINT fk_resolucion_docente FOREIGN KEY (DNI_docente) REFERENCES Docente(DNI_docente),
 CONSTRAINT fk_resolucion_actividad FOREIGN KEY (cod_actividad) REFERENCES Actividad(cod_actividad)
 ON DELETE CASCADE
@@ -66,11 +66,11 @@ ON UPDATE RESTRICT
 
 CREATE TABLE Alumno (
 DNI_alumno integer NOT NULL,
-CONSTRAINT check_dni_alumno CHECK (DNI_alumno > 0),
 num_alumno integer NOT NULL,
-CONSTRAINT check_numero CHECK (num_alumno > 0),
 cod_resolucion integer NOT NULL,
 CONSTRAINT pk_alumno PRIMARY KEY (DNI_alumno),
+CONSTRAINT check_dni_alumno CHECK (DNI_alumno > 0),
+CONSTRAINT check_numero CHECK (num_alumno > 0),
 CONSTRAINT fk_alumno_persona FOREIGN KEY (DNI_alumno) REFERENCES Persona(DNI),
 CONSTRAINT fk_alumno_resolucion FOREIGN KEY (cod_resolucion) REFERENCES Resolucion(cod_resolucion)
 ON DELETE CASCADE
