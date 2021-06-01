@@ -130,14 +130,12 @@ usuario varchar(50),
 CONSTRAINT pk_auditoria PRIMARY KEY (cod_resolucion)
 );
 
-/* antes de ingresar un docente a la relacion asignado debemos chequear que no pertenece a materia*/
-
 delimiter $$
 CREATE TRIGGER trigger_docente_responsable
 	BEFORE INSERT ON Asignado
 	  FOR EACH ROW
 		BEGIN
-			IF NEW.DNI_docente IN (SELECT DNI_docente from Materia WHERE (Materia.cod_materia = NEW.cod_materia)) THEN 
+			IF NEW.DNI_docente IN (SELECT DNI_docente from Materia WHERE NEW.cod_materia = Materia.cod_materia) THEN 
 				signal sqlstate '45000';
             END IF;
 		END;
@@ -149,7 +147,7 @@ CREATE TRIGGER trigger_docente_asignado
 	BEFORE INSERT ON Materia
 	  FOR EACH ROW
 		BEGIN
-			IF NEW.DNI_docente IN (SELECT DNI_docente from Asignado WHERE (Asignado.cod_materia = NEW.cod_materia)) THEN 
+			IF NEW.DNI_docente IN (SELECT DNI_docente from Asignado WHERE NEW.cod_materia = Asignado.cod_materia) THEN 
 				signal sqlstate '45000';
             END IF;
 		END;
