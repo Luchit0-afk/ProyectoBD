@@ -130,6 +130,7 @@ usuario varchar(50),
 CONSTRAINT pk_auditoria PRIMARY KEY (cod_resolucion)
 );
 
+/* Trigger que se encarga de verificar que un docente responsable de una materia no sea parte de su equipo docente */
 delimiter $$
 CREATE TRIGGER trigger_docente_responsable
 	BEFORE INSERT ON Asignado
@@ -142,6 +143,7 @@ CREATE TRIGGER trigger_docente_responsable
 $$
 delimiter ;
 
+/* Trigger que se encarga de verificar que un docente parte del equipo docente de una materia no sea su responsable */
 delimiter $$
 CREATE TRIGGER trigger_docente_asignado
 	BEFORE INSERT ON Materia
@@ -154,6 +156,7 @@ CREATE TRIGGER trigger_docente_asignado
 $$
 delimiter ;
 
+/* Trigger que se encarga de generar informacion de auditoria automaticamente*/
 delimiter $$
 CREATE TRIGGER trigger_carga_auditoria
 	AFTER UPDATE ON Resolucion
@@ -164,5 +167,17 @@ CREATE TRIGGER trigger_carga_auditoria
 $$
 delimiter ;
 
+/* Trigger que se encarga de verificar que un alumno no puede cursar una materia de la que es docente */
+delimiter $$
+CREATE TRIGGER trigger_alumno_no_es_profesor
+	BEFORE INSERT ON Cursa
+		FOR EACH ROW
+			BEGIN
+				IF ((NEW.DNI_alumno IN (SELECT DNI_docente from Asignado WHERE NEW.cod_materia = Asignado.cod_materia)) OR (NEW.DNI_alumno IN (SELECT DNI_docente from Materia WHERE NEW.cod_materia = Materia.cod_materia))) THEN 
+					signal sqlstate '45000';
+				END IF;
+            END;
+$$
+delimiter ;
 
 
