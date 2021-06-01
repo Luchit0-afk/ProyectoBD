@@ -22,9 +22,9 @@ ON UPDATE RESTRICT
 
 CREATE TABLE Docente (
 DNI_docente integer NOT NULL,
-CONSTRAINT check_dni_docente CHECK (DNI_docente > 0),
 dedicacion enum('Exclusivo','Semi-exclusivo','Simple') NOT NULL,
 CONSTRAINT pk_docente PRIMARY KEY (DNI_docente),
+CONSTRAINT check_dni_docente CHECK (DNI_docente > 0),
 CONSTRAINT fk_docente_persona FOREIGN KEY (DNI_docente) REFERENCES Persona(DNI)
 ON DELETE CASCADE
 ON UPDATE RESTRICT
@@ -66,7 +66,7 @@ ON UPDATE RESTRICT
 
 CREATE TABLE Alumno (
 DNI_alumno integer NOT NULL,
-num_alumno integer NOT NULL,
+num_alumno integer NOT NULL AUTO_INCREMENT,
 cod_resolucion integer NOT NULL,
 CONSTRAINT pk_alumno PRIMARY KEY (DNI_alumno),
 CONSTRAINT check_dni_alumno CHECK (DNI_alumno > 0),
