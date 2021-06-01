@@ -20,7 +20,12 @@ INSERT INTO Persona (DNI,nombre,apellido,direccion) VALUES
 (34547864,'Micaela','Lepori','Alberdi 813'),
 (29446541,'Franco','Barzola','9 de julio 81'),
 (29435690,'Matias','Barzola','San Martin 890'),
-(25501211,'Fabian','Palacio','Bolivia 21');
+(25501211,'Fabian','Palacio','Bolivia 21'),
+(17864350,'Facundo','Ortiz','Alberdi 98'),
+(38974563,'Gonzalo','Espinoza','Constitucion 123'),
+(40156234,'Sofia','Quiroga','San Martin 42'),
+(12345678,'Martina','Martinez','Velez Sarfield 1');
+
 
 INSERT INTO MPersona (DNI,telefono) VALUES 
 (12543569,15447889),
@@ -49,7 +54,11 @@ INSERT INTO Docente (DNI_docente,dedicacion) VALUES
 (34547864,3),
 (29446541,1),
 (29435690,3),
-(25501211,2);
+(25501211,2),
+(17864350,1),
+(38974563,3),
+(40156234,2),
+(12345678,1);
 
 INSERT INTO Materia (nombre,DNI_docente) VALUES 
 ('Base De Datos',39544576),
@@ -133,7 +142,12 @@ INSERT INTO Cursa (DNI_alumno,cod_materia) VALUES
 (34435690,0005);
 
 INSERT INTO Asignado (cod_materia,DNI_docente) VALUES
-(0006,25501211);
+(0006,25501211),
+(0005,17864350),
+(0001,38974563),
+(0002,40156234),
+(0001,12345678);
+
 
 INSERT INTO Pertenece (cod_facultad,DNI_docente,cod_cargo) VALUES
 (0005,12543569,0004),

@@ -137,9 +137,7 @@ CREATE TRIGGER trigger_docente_responsable
 	BEFORE INSERT ON Asignado
 	  FOR EACH ROW
 		BEGIN
-			IF NEW.DNI_docente IN (SELECT DNI_docente from Materia) THEN 
-			/* Si el docente no es responsable de una materia*/
-            /* Si existe  */
+			IF NEW.DNI_docente IN (SELECT DNI_docente from Materia WHERE (Materia.cod_materia = NEW.cod_materia)) THEN 
 				signal sqlstate '45000';
             END IF;
 		END;
@@ -151,9 +149,7 @@ CREATE TRIGGER trigger_docente_asignado
 	BEFORE INSERT ON Materia
 	  FOR EACH ROW
 		BEGIN
-			IF NEW.DNI_docente IN (SELECT DNI_docente from Asignado) THEN 
-			/* Si el docente no es responsable de una materia*/
-            /* Si existe  */
+			IF NEW.DNI_docente IN (SELECT DNI_docente from Asignado WHERE (Asignado.cod_materia = NEW.cod_materia)) THEN 
 				signal sqlstate '45000';
             END IF;
 		END;
