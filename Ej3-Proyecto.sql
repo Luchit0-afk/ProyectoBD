@@ -174,7 +174,7 @@ CREATE TRIGGER trigger_carga_auditoria
 	AFTER UPDATE ON Resolucion
 		FOR EACH ROW
 			BEGIN
-				INSERT INTO Auditoria VALUES (OLD.nota,NEW.nota,NOW(),CURRENT_USER());
+				INSERT INTO Auditoria VALUES (NULL,OLD.nota,NEW.nota,NOW(),CURRENT_USER());
 			END;
 $$
 delimiter ;
