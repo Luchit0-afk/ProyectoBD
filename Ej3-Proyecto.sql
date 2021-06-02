@@ -6,7 +6,7 @@ DNI integer NOT NULL,
 nombre varchar(50),
 apellido varchar(50),
 direccion varchar(100),
-PRIMARY KEY (DNI),
+CONSTRAINT pk_persona PRIMARY KEY (DNI),
 CONSTRAINT check_dni_persona CHECK (DNI > 0)
 );
 
@@ -15,7 +15,7 @@ DNI integer NOT NULL,
 telefono integer,
 CONSTRAINT pk_mpersona PRIMARY KEY (DNI,telefono),
 CONSTRAINT check_telefono CHECK (telefono > 0),
-CONSTRAINT fk_persona FOREIGN KEY (DNI) REFERENCES Persona(DNI)
+CONSTRAINT fk_mpersona_persona FOREIGN KEY (DNI) REFERENCES Persona(DNI)
 ON DELETE CASCADE
 ON UPDATE RESTRICT
 );
@@ -58,7 +58,9 @@ DNI_docente integer NOT NULL,
 cod_actividad integer NOT NULL,
 CONSTRAINT pk_resolucion PRIMARY KEY (cod_resolucion),
 CONSTRAINT check_nota CHECK (nota > 0 AND nota < 11),
-CONSTRAINT fk_resolucion_docente FOREIGN KEY (DNI_docente) REFERENCES Docente(DNI_docente),
+CONSTRAINT fk_resolucion_docente FOREIGN KEY (DNI_docente) REFERENCES Docente(DNI_docente)
+ON DELETE CASCADE
+ON UPDATE RESTRICT,
 CONSTRAINT fk_resolucion_actividad FOREIGN KEY (cod_actividad) REFERENCES Actividad(cod_actividad)
 ON DELETE CASCADE
 ON UPDATE RESTRICT
@@ -66,12 +68,14 @@ ON UPDATE RESTRICT
 
 CREATE TABLE Alumno (
 DNI_alumno integer NOT NULL,
-num_alumno integer NOT NULL AUTO_INCREMENT,
+num_alumno integer NOT NULL,
 cod_resolucion integer NOT NULL,
 CONSTRAINT pk_alumno PRIMARY KEY (DNI_alumno),
 CONSTRAINT check_dni_alumno CHECK (DNI_alumno > 0),
-CONSTRAINT check_numero CHECK (num_alumno > 0),
-CONSTRAINT fk_alumno_persona FOREIGN KEY (DNI_alumno) REFERENCES Persona(DNI),
+CONSTRAINT check_num_alumno CHECK (num_alumno > 0),
+CONSTRAINT fk_alumno_persona FOREIGN KEY (DNI_alumno) REFERENCES Persona(DNI)
+ON DELETE CASCADE
+ON UPDATE RESTRICT,
 CONSTRAINT fk_alumno_resolucion FOREIGN KEY (cod_resolucion) REFERENCES Resolucion(cod_resolucion)
 ON DELETE CASCADE
 ON UPDATE RESTRICT
@@ -93,7 +97,9 @@ CREATE TABLE Cursa (
 DNI_alumno integer NOT NULL,
 cod_materia integer NOT NULL,
 CONSTRAINT pk_cursa PRIMARY KEY (DNI_alumno,cod_materia),
-CONSTRAINT fk_cursa_alumno FOREIGN KEY (DNI_alumno) REFERENCES Alumno(DNI_alumno),
+CONSTRAINT fk_cursa_alumno FOREIGN KEY (DNI_alumno) REFERENCES Alumno(DNI_alumno)
+ON DELETE CASCADE
+ON UPDATE RESTRICT,
 CONSTRAINT fk_cursa_materia FOREIGN KEY (cod_materia) REFERENCES Materia(cod_materia)
 ON DELETE CASCADE
 ON UPDATE RESTRICT
@@ -103,8 +109,10 @@ CREATE TABLE Asignado (
 cod_materia integer NOT NULL AUTO_INCREMENT,
 DNI_docente integer NOT NULL,
 CONSTRAINT pk_asignado PRIMARY KEY (cod_materia,DNI_docente),
-CONSTRAINT fk_asignado_materia FOREIGN KEY (cod_materia) REFERENCES Materia(cod_materia),
-CONSTRAINT fk_asignado_2 FOREIGN KEY (DNI_docente) REFERENCES Docente(DNI_docente)
+CONSTRAINT fk_asignado_materia FOREIGN KEY (cod_materia) REFERENCES Materia(cod_materia)
+ON DELETE CASCADE
+ON UPDATE RESTRICT,
+CONSTRAINT fk_asignado_docente FOREIGN KEY (DNI_docente) REFERENCES Docente(DNI_docente)
 ON DELETE CASCADE
 ON UPDATE RESTRICT
 );
@@ -114,20 +122,24 @@ cod_facultad integer NOT NULL AUTO_INCREMENT,
 DNI_docente integer NOT NULL,
 cod_cargo integer NOT NULL,
 CONSTRAINT pk_pertenece PRIMARY KEY (cod_facultad,DNI_docente,cod_cargo),
-CONSTRAINT fk_pertenece_facultad FOREIGN KEY (cod_facultad) REFERENCES Facultad(cod_facultad),
-CONSTRAINT fk_pertenece_docente FOREIGN KEY (DNI_docente) REFERENCES Docente(DNI_docente),
+CONSTRAINT fk_pertenece_facultad FOREIGN KEY (cod_facultad) REFERENCES Facultad(cod_facultad)
+ON DELETE CASCADE
+ON UPDATE RESTRICT,
+CONSTRAINT fk_pertenece_docente FOREIGN KEY (DNI_docente) REFERENCES Docente(DNI_docente)
+ON DELETE CASCADE
+ON UPDATE RESTRICT,
 CONSTRAINT fk_pertenece_cargo FOREIGN KEY (cod_cargo) REFERENCES Cargo(cod_cargo)
 ON DELETE CASCADE
 ON UPDATE RESTRICT
 );
 
 CREATE TABLE Auditoria (
-cod_resolucion integer,
+id_resolucion integer NOT NULL AUTO_INCREMENT,
 calificacion_anterior integer,
 calificacion_nueva integer,
 fecha date,
 usuario varchar(50),
-CONSTRAINT pk_auditoria PRIMARY KEY (cod_resolucion)
+CONSTRAINT pk_auditoria PRIMARY KEY (id_resolucion)
 );
 
 /* Trigger que se encarga de verificar que un docente responsable de una materia no sea parte de su equipo docente */
@@ -162,7 +174,7 @@ CREATE TRIGGER trigger_carga_auditoria
 	AFTER UPDATE ON Resolucion
 		FOR EACH ROW
 			BEGIN
-				INSERT INTO Auditoria VALUES (OLD.cod_resolucion,OLD.nota,NEW.nota,NOW(),CURRENT_USER());
+				INSERT INTO Auditoria VALUES (OLD.nota,NEW.nota,NOW(),CURRENT_USER());
 			END;
 $$
 delimiter ;
