@@ -19,7 +19,7 @@ WHERE Materia.cod_materia = Asignado.cod_materia)
 # SELECT cod_materia FROM Materia WHERE cod_materia NOT IN (SELECT cod_materia FROM (Materia NATURAL JOIN Asignado))
 
 /*C}*/
-SELECT * FROM
+/*SELECT * FROM
 ((SELECT Alumno.DNI_alumno FROM  
 (Docente JOIN Alumno)
 WHERE (Alumno.DNI_alumno = Docente.DNI_docente)) as dni_alumnos
@@ -43,4 +43,3 @@ WHERE dedicacion = 'Simple') as Dni_docentes
 JOIN Persona)
 WHERE DNI_docente = DNI;
 */
-

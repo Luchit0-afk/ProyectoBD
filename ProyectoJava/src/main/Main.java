@@ -44,7 +44,16 @@ public class Main {
 						System.out.println("Actividad ingresada correctamente.");
 		                break;
 		            case 2:  
-
+		            	System.out.println("Ingrese el codigo de la materia que desea eliminar:");
+		                int codigo = s.nextInt();
+		                while (codigo < 1) {
+		                	System.out.println("Debe ingresar un numero mayor a 0");
+		                	System.out.println("Por favor, intente nuevamente");
+		                	codigo = s.nextInt();
+		                }
+		            	String query2 = eliminarMateria(codigo);  
+		            	PreparedStatement statement2 = connection.prepareStatement(query2);
+		            	ResultSet resultSet = statement2.executeQuery();
 		            case 3: 
 		            	System.out.print("Ingresa la materia deseada: ");
 						int cod_mat  = s.nextInt();
@@ -96,6 +105,17 @@ public class Main {
 		//('TP3 8queens',0005),
 		return query;
 	}
+	
+	/**
+	 * Crea una consulta que elimina una materia dado su codigo
+	 * @param cod_materia codigo de la materia a eliminar (int (positivo)) 
+	 * @return consulta (String)
+	 */
+	public static String eliminarMateria(int cod_materia) {
+		String query = "DELETE FROM Materia WHERE cod_materia = " + cod_materia;
+		return query;
+	}
+	
 	/**
 	 * Forma un query en forma de String para devolver los datos de alumnos de una materia dada
 	 * @param cod_materia codigo de la materia
