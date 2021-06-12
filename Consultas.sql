@@ -13,6 +13,8 @@ WHERE cod_materia NOT IN
 WHERE Materia.cod_materia = Asignado.cod_materia)
 */
 # Una materia debe tener un responsable si o si
+
+
 # MENOS CODIGO, PERO NO ANDA
 # SELECT cod_materia FROM Materia WHERE cod_materia NOT IN (SELECT cod_materia FROM (Materia NATURAL JOIN Asignado))
 
