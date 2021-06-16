@@ -1,16 +1,24 @@
 package main;
 
+import java.io.FileReader;
 import java.sql.*;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
 		try {
+	        FileReader reader = new FileReader("db.properties");
+	  
+	        Properties p = new Properties();
+	  
+	        p.load(reader);
+	        
 			String driver = "com.mysql.cj.jdbc.Driver";
 			String url = "jdbc:mysql://localhost/Proyecto";
-			String username = "root";
-			String password = "root1234?";
+			String username = p.getProperty("username");
+			String password = p.getProperty("password");
 			
 			Class.forName(driver);
 			
@@ -22,6 +30,7 @@ public class Main {
 				System.out.println("1 - Si quieres insertar actividades");
 				System.out.println("2 - Si quieres eliminar una materia");
 				System.out.println("3 - Si quieres ver todos los alumnos de una materia");
+				System.out.println("4 - Salir");
 				System.out.print("Ingresa la opcion: ");
 				
 				Scanner s = new Scanner(System.in);
@@ -53,7 +62,8 @@ public class Main {
 		                }
 		            	String query2 = eliminarMateria(codigo);  
 		            	PreparedStatement statement2 = connection.prepareStatement(query2);
-		            	ResultSet resultSet = statement2.executeQuery();
+		            	statement2.executeUpdate();
+		            	break;
 		            case 3: 
 		            	System.out.print("Ingresa la materia deseada: ");
 						int cod_mat  = s.nextInt();
@@ -61,23 +71,26 @@ public class Main {
 						String query3 = alumnosDeMateria(cod_mat);
 						
 						PreparedStatement statement3 = connection.prepareStatement(query3);
-						ResultSet resultSet = statement3.executeQuery();
+						ResultSet resultSet2 = statement3.executeQuery();
 						
-						while(resultSet.next()) 
+						while(resultSet2.next()) 
 					      {
-					       System.out.print(" DNI: " + resultSet.getString("DNI"));
-					       System.out.print("; Nombre: "+resultSet.getString("nombre") + " " +resultSet.getString("apellido"));
-					       System.out.print("; Direccion: "+resultSet.getString("direccion"));
+					       System.out.print(" DNI: " + resultSet2.getString("DNI"));
+					       System.out.print("; Nombre: "+resultSet2.getString("nombre") + " " +resultSet2.getString("apellido"));
+					       System.out.print("; Direccion: "+resultSet2.getString("direccion"));
 					       System.out.print("\n   ");
 					       System.out.print("\n   ");
 					    }
 		                break;
-		            
+		            case 4:
+		            	bool = false;
+		            	System.out.println("Gracias por usar nuestra base de datos :)");
+		            	break;
 		            default: System.out.print("Opcion incorrecta");
 		                     break;
 		        }
 			}
-		     
+		connection.close();     
 		}
 		catch(ClassNotFoundException cnfe) {
 		    System.err.println("Error loading driver: " + cnfe);

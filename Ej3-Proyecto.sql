@@ -50,6 +50,7 @@ ON DELETE CASCADE
 ON UPDATE RESTRICT
 );
 
+
 CREATE TABLE Resolucion (
 cod_resolucion integer NOT NULL AUTO_INCREMENT,
 fecha_hora datetime,
@@ -191,5 +192,4 @@ CREATE TRIGGER trigger_alumno_no_es_profesor
             END;
 $$
 delimiter ;
-
 
