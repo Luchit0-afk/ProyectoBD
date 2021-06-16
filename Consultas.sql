@@ -5,10 +5,9 @@ USE Proyecto;
 # ACTIVIDAD A
 SELECT DNI_alumno 
 FROM Alumno 
-WHERE DNI_Alumno NOT IN (SELECT DNI_alumno 
+WHERE DNI_Alumno NOT IN (SELECT DNI_Alumno
 FROM (Alumno NATURAL JOIN Resolucion NATURAL JOIN Actividad)
-WHERE cod_materia = 2) 
-#SELECT DNI_alumno, cod_resolucion, cod_actividad FROM (Alumno NATURAL JOIN Resolucion) # tengo todas las resoluciones de un alumno
+WHERE cod_materia = 2) AND DNI_alumno IN (SELECT DNI_alumno FROM (Cursa NATURAL JOIN Alumno))
 
 # ACTIVIDAD B
 /*SELECT cod_materia 
